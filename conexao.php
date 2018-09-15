@@ -1,22 +1,15 @@
 <?php
-$serverName = "serverbdtestepratico.database.windows.net";
-$connectionOptions = array(
-    "Database" => "Bd_testepratico",
-    "Uid" => "augustompa",
-    "PWD" => "Augustoa08u90"
-);
-//Establishes the connection
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-$tsql= "SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName
-        FROM [SalesLT].[ProductCategory] pc
-        JOIN [SalesLT].[Product] p
-     ON pc.productcategoryid = p.productcategoryid";
-$getResults= sqlsrv_query($conn, $tsql);
-echo ("Reading data from table" . PHP_EOL);
-if ($getResults == FALSE)
-    echo (sqlsrv_errors());
-while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
- echo ($row['CategoryName'] . " " . $row['ProductName'] . PHP_EOL);
+try {
+    $conn = new PDO("sqlsrv:server = tcp:serverbdtestepratico.database.windows.net,1433; Database = Bd_testepratico", "augustompa", "{your_password_here}");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
-sqlsrv_free_stmt($getResults);
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
+}
+
+// SQL Server Extension Sample Code:
+$connectionInfo = array("UID" => "augustompa@serverbdtestepratico", "pwd" => "{your_password_here}", "Database" => "Bd_testepratico", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:serverbdtestepratico.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 ?>
