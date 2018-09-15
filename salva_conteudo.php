@@ -17,5 +17,5 @@ $conta= $_POST ['conta'];
 
 $msg_contato = "INSERT INTO dbo.empresa (cnpj,razao_social,nome_fantasia,email,endereco,cidade,estado,telefone,Categoria,status_cadastro,Agencia,conta) VALUES ('$cnpj','$razaosocial',$nomefantasia,'$email','$endereco','$cidade','$estado','$telefone','$Categoria','$status','$Agencia','$conta', NOW ())";
 
-$msg_contato = mysqli_query($conn, $msg_contato)
+$msg_contato = PDO($conn, $msg_contato)
 ?>
