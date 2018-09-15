@@ -1,7 +1,7 @@
 <?php
 $serverName = "serverbdtestepratico.database.windows.net";
 $connectionOptions = array(
-    "Database" => "empresa",
+    "Database" => "Bd_testepratico",
     "Uid" => "augustompa",
     "PWD" => "Augustoa08u90"
 );
